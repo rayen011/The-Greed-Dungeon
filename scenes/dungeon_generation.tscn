@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtq4vf68limdq"]
+
+[ext_resource type="Script" uid="uid://qfa5xxeu5fe0" path="res://scripts/dungeon_generation.gd" id="1_3n6r7"]
+[ext_resource type="Texture2D" uid="uid://bljoi3tki8l1r" path="res://assets/DungeonStarter/DungeonStarter.png" id="2_nn07g"]
+[ext_resource type="PackedScene" uid="uid://b776mrp5dxyxb" path="res://scenes/player/player.tscn" id="3_nn07g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xu24q"]
+texture = ExtResource("2_nn07g")
+1:16/0 = 0
+1:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_e1dh2"]
+physics_layer_0/collision_layer = 16
+sources/0 = SubResource("TileSetAtlasSource_xu24q")
+
+[node name="dungeonGeneration" type="Node2D" node_paths=PackedStringArray("Tilemap", "player")]
+script = ExtResource("1_3n6r7")
+Tilemap = NodePath("TileMapLayer")
+player = NodePath("player")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_e1dh2")
+
+[node name="player" parent="." instance=ExtResource("3_nn07g")]
+position = Vector2(198, 138)
+
+[node name="enemy_container" type="Node" parent="."]
