@@ -1,7 +1,7 @@
 extends CharacterBody2D
-
-const WALK_SPEED = 200.0
-const SPRINT_SPEED = 350.0
+class_name Player
+const WALK_SPEED = 500
+const SPRINT_SPEED = 1000
 
 
 var zoom:bool = true:
@@ -17,7 +17,7 @@ var facing_dir: String = "down"   # "up", "down", "left", "right"
 var has_bomb: bool = true
 var is_sprinting: bool = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Handle input
 	handle_input()
 	move_and_slide()
@@ -48,3 +48,8 @@ func handle_input() -> void:
 			facing_dir = "down" if velocity_input.y > 0 else "up"
 	else:
 		velocity = Vector2.ZERO
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	if area is Enemy:
+		area.queue_free()

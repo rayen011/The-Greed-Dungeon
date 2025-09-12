@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b776mrp5dxyxb"]
+[gd_scene load_steps=5 format=3 uid="uid://b776mrp5dxyxb"]
 
 [ext_resource type="Texture2D" uid="uid://bv40x7we40x8t" path="res://assets/art/skull knight-Sheet.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://35sdi332d25f" path="res://scripts/player/player.gd" id="1_dovo2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
+radius = 11.0
 
 [node name="player" type="CharacterBody2D"]
-collision_mask = 16
+collision_mask = 48
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,7 +20,17 @@ region_enabled = true
 region_rect = Rect2(19.8097, 21.258, 25.1888, 21.3334)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_dovo2")
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="hit_box" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+shape = SubResource("CircleShape2D_gmlin")
+debug_color = Color(0.807843, 0.294118, 0.745098, 0.227451)
+
+[connection signal="area_entered" from="hit_box" to="." method="_on_hit_box_area_entered"]

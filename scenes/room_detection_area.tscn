@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://b737unj3nu845"]
+
+[ext_resource type="Script" uid="uid://cya184mti32ra" path="res://scripts/room_detection_area.gd" id="1_235xy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxdd4"]
+size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="Gradient_235xy"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0305549, 0.494399, 0.649448, 0.34902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mxdd4"]
+gradient = SubResource("Gradient_235xy")
+width = 16
+height = 16
+
+[node name="room_detection_area" type="Area2D"]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_235xy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mxdd4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_mxdd4")
+
+[node name="room_label" type="Label" parent="Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 21.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemy_label" type="Label" parent="Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -16.0
+offset_right = 107.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+text = "enemies: 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

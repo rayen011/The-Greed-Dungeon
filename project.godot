@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Greed Dungeon"
-run/main_scene="uid://dmng8630qciy4"
+run/main_scene="uid://dtq4vf68limdq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -64,6 +64,7 @@ sprint={
 2d_physics/layer_3="bullet"
 2d_physics/layer_4="item"
 2d_physics/layer_5="obs"
+2d_physics/layer_6="room"
 
 [rendering]
 

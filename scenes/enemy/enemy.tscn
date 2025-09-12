@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://be8m3div3g1v4"]
+[gd_scene load_steps=6 format=3 uid="uid://be8m3div3g1v4"]
+
+[ext_resource type="Script" uid="uid://pinqu33l1wqu" path="res://scripts/enemy/enemy.gd" id="1_4a83h"]
 
 [sub_resource type="Gradient" id="Gradient_883im"]
 offsets = PackedFloat32Array(0, 0.796537)
@@ -15,10 +17,22 @@ fill_to = Vector2(1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
 size = Vector2(16, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_883im"]
+radius = 40.025
+
 [node name="enemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 53
+script = ExtResource("1_4a83h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_4a83h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a3pup")
+
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_883im")
+debug_color = Color(0.760784, 0.333333, 0.780392, 0.270588)
