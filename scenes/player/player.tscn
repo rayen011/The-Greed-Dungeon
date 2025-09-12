@@ -10,9 +10,15 @@ height = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
 radius = 11.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 48
+motion_mode = 1
 script = ExtResource("1_dovo2")
+init_attack = 1.0
+init_max_health = 10.0
+init_health = 10.0
+init_crit_chance = 1.0
+gold = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8afob")

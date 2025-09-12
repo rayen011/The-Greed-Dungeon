@@ -132,8 +132,11 @@ func spawn_enemy(x,y):
 	enemy_container.add_child(enemy)
 func apply_room_detection(x,y,w,h,index):
 	var room_area = room_area_scene.instantiate()
+	room_area.room_cleared.connect(_on_room_cleared)
 	room_area.room_index = index
 	room_area.position = Vector2(x *16,y*16)
 	room_area.size = Vector2(w,h)
 	room_area_container.add_child(room_area)
 	
+func _on_room_cleared(_index):
+	%deal_interface. show_upgrade()

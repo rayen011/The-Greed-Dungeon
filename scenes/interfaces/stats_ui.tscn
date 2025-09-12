@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://virtvvq7l5gn"]
+
+[ext_resource type="Script" uid="uid://ccmwkae6lfev0" path="res://scripts/interfaces/stats_ui.gd" id="1_4fgku"]
+
+[node name="stats_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4fgku")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 129.0
+offset_bottom = 236.0
+
+[node name="health_label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "attack"
+
+[node name="attack_label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "attack"
+
+[node name="crit_label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "attack"
+
+[node name="gold_label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "attack"

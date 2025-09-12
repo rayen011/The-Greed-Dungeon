@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://dtq4vf68limdq"]
+[gd_scene load_steps=10 format=4 uid="uid://dtq4vf68limdq"]
 
 [ext_resource type="Script" uid="uid://qfa5xxeu5fe0" path="res://scripts/dungeon_generation.gd" id="1_3n6r7"]
 [ext_resource type="Texture2D" uid="uid://bljoi3tki8l1r" path="res://assets/DungeonStarter/DungeonStarter.png" id="2_nn07g"]
 [ext_resource type="PackedScene" uid="uid://b776mrp5dxyxb" path="res://scenes/player/player.tscn" id="3_nn07g"]
+[ext_resource type="PackedScene" uid="uid://bcu4c2wq0ug2y" path="res://scenes/interfaces/deal_interface.tscn" id="4_xu24q"]
+[ext_resource type="PackedScene" uid="uid://virtvvq7l5gn" path="res://scenes/interfaces/stats_ui.tscn" id="5_e1dh2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn07g"]
 texture = ExtResource("2_nn07g")
@@ -126,3 +128,12 @@ position = Vector2(198, 138)
 [node name="enemy_container" type="Node" parent="."]
 
 [node name="room_area_container" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="stats_ui" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("5_e1dh2")]
+player = NodePath("../../player")
+
+[node name="deal_interface" parent="UI" instance=ExtResource("4_xu24q")]
+unique_name_in_owner = true
+visible = false

@@ -1,7 +1,19 @@
 extends CharacterBody2D
 class_name Player
+
 const WALK_SPEED = 500
 const SPRINT_SPEED = 1000
+
+@export var init_attack:float
+@export var init_max_health:float
+@export var init_health:float
+@export var init_crit_chance:float
+@export var gold:int
+
+var current_attack:float
+var current_max_health:float
+var current_health:float
+var current_crit_chance:float
 
 
 var zoom:bool = true:
@@ -16,7 +28,12 @@ var velocity_input: Vector2 = Vector2.ZERO
 var facing_dir: String = "down"   # "up", "down", "left", "right"
 var has_bomb: bool = true
 var is_sprinting: bool = false
-
+func _ready() -> void:
+	current_attack = init_attack
+	current_max_health = init_max_health
+	current_health = init_health
+	current_crit_chance = init_crit_chance
+	
 func _physics_process(_delta: float) -> void:
 	# Handle input
 	handle_input()

@@ -7,6 +7,9 @@ signal room_cleared(room_index: int)
 @onready var room_label: Label = $Sprite2D/room_label
 @onready var enemy_label: Label = $Sprite2D/enemy_label
 
+
+
+
 var enemy_count: int = 0
 var room_index: int
 var size: Vector2

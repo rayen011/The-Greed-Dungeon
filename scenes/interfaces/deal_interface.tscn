@@ -1,0 +1,141 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcu4c2wq0ug2y"]
+
+[ext_resource type="Script" uid="uid://bb1k87v3l6aeg" path="res://scripts/interfaces/deal_interface.gd" id="1_7ygk7"]
+[ext_resource type="FontFile" uid="uid://j52mkvcmiy4y" path="res://fonts/Pixellari.ttf" id="1_g3cch"]
+[ext_resource type="Texture2D" uid="uid://cumxqk1vycido" path="res://icon.svg" id="2_7ygk7"]
+
+[node name="deal_interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ygk7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.107616, 0.017716, 0.179922, 0.180392)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_top = 64.0
+offset_right = -251.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title_label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = 4.0
+offset_right = 131.0
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 32
+text = "Double Or Nothing !"
+
+[node name="chance_label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.0
+offset_top = 43.0
+offset_right = 138.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 28
+text = "Chance %"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="upgrade_type_label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.0
+offset_top = 84.0
+offset_right = 138.0
+offset_bottom = 116.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 28
+text = "attack damage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 195.0
+offset_right = 341.0
+offset_bottom = 349.0
+theme_override_constants/separation = 20
+
+[node name="current_stat_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 28
+text = "current:999"
+vertical_alignment = 1
+
+[node name="double_stat_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 28
+text = "double:99999"
+vertical_alignment = 1
+
+[node name="lose_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 28
+text = "lose:10"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(415, 209)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("2_7ygk7")
+
+[node name="refresh_timer" type="Timer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 393.0
+offset_right = 581.0
+offset_bottom = 460.0
+theme_override_constants/separation = 65
+
+[node name="accept_b" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 41
+text = "Deal !"
+
+[node name="cancel_b" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g3cch")
+theme_override_font_sizes/font_size = 41
+text = "Cancel"
+
+[connection signal="timeout" from="refresh_timer" to="." method="_on_refresh_timer_timeout"]
+[connection signal="pressed" from="HBoxContainer/accept_b" to="." method="_on_accept_b_pressed"]
+[connection signal="pressed" from="HBoxContainer/cancel_b" to="." method="_on_cancel_b_pressed"]
