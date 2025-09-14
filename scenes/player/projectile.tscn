@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://o4uq2ih6idf0"]
+
+[ext_resource type="Script" uid="uid://vavuvm1jm5f3" path="res://scripts/player/projectile.gd" id="1_xebok"]
+
+[sub_resource type="Gradient" id="Gradient_nbrq2"]
+offsets = PackedFloat32Array(0.471861)
+colors = PackedColorArray(0.398422, 0.759151, 0.528151, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xebok"]
+gradient = SubResource("Gradient_nbrq2")
+width = 8
+height = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c28ns"]
+size = Vector2(8, 8)
+
+[node name="projectile" type="Area2D"]
+collision_layer = 4
+collision_mask = 18
+script = ExtResource("1_xebok")
+damage = 2.0
+lifetime = 0.5
+bounces = 3
+spread_angle = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_xebok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c28ns")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,17 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://b776mrp5dxyxb"]
+[gd_scene load_steps=10 format=3 uid="uid://b776mrp5dxyxb"]
 
 [ext_resource type="Texture2D" uid="uid://bv40x7we40x8t" path="res://assets/art/skull knight-Sheet.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://35sdi332d25f" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="PackedScene" uid="uid://o4uq2ih6idf0" path="res://scenes/player/projectile.tscn" id="2_gmlin"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 5.0
 height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
-radius = 11.0
+radius = 9.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmlin"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 0.427451)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvxji"]
+bg_color = Color(0.752582, 0.752582, 0.752582, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.346569, 0.346569, 0.346569, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p47bc"]
+bg_color = Color(0, 0, 0, 0.341176)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75vfm"]
+bg_color = Color(0.701961, 0.211765, 0.294118, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 48
+collision_mask = 56
 motion_mode = 1
 script = ExtResource("1_dovo2")
 init_attack = 1.0
@@ -19,6 +54,7 @@ init_max_health = 10.0
 init_health = 10.0
 init_crit_chance = 1.0
 gold = 1
+projectile_scene = ExtResource("2_gmlin")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8afob")
@@ -33,10 +69,36 @@ shape = SubResource("CapsuleShape2D_dovo2")
 zoom = Vector2(3, 3)
 
 [node name="hit_box" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
 shape = SubResource("CircleShape2D_gmlin")
 debug_color = Color(0.807843, 0.294118, 0.745098, 0.227451)
 
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="reload_bar" type="ProgressBar" parent="."]
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 7.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gmlin")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lvxji")
+value = 70.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 7.0
+offset_bottom = -16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_p47bc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_75vfm")
+value = 70.0
+show_percentage = false
+
+[node name="ProjectileContainer" type="Node" parent="."]
+
 [connection signal="area_entered" from="hit_box" to="." method="_on_hit_box_area_entered"]
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://be8m3div3g1v4"]
+[gd_scene load_steps=9 format=3 uid="uid://be8m3div3g1v4"]
 
 [ext_resource type="Script" uid="uid://pinqu33l1wqu" path="res://scripts/enemy/enemy.gd" id="1_4a83h"]
 
@@ -18,9 +18,31 @@ fill_to = Vector2(1, 1)
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_883im"]
-radius = 40.025
+radius = 222.009
 
-[node name="enemy" type="Area2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4a83h"]
+bg_color = Color(0.211765, 0.0941176, 0.145098, 0.690196)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3pup"]
+bg_color = Color(0.694118, 0.113725, 0.321569, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.993839, 0.427693, 0.525603, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
+
+[node name="enemy" type="Area2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 53
 script = ExtResource("1_4a83h")
@@ -32,7 +54,33 @@ texture = SubResource("GradientTexture2D_4a83h")
 shape = SubResource("RectangleShape2D_a3pup")
 
 [node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 shape = SubResource("CircleShape2D_883im")
 debug_color = Color(0.760784, 0.333333, 0.780392, 0.270588)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -15.0
+offset_top = -18.0
+offset_right = 13.0
+offset_bottom = -12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_4a83h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a3pup")
+value = 70.0
+show_percentage = false
+
+[node name="hit_box" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+shape = SubResource("RectangleShape2D_4a83h")
+debug_color = Color(0.952941, 0.196078, 0.258824, 0.258824)
+
+[node name="attack_cooldown_timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="hit_box" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_exited" from="hit_box" to="." method="_on_hit_box_body_exited"]
+[connection signal="timeout" from="attack_cooldown_timer" to="." method="_on_attack_cooldown_timer_timeout"]

@@ -23,6 +23,7 @@ script = ExtResource("1_235xy")
 shape = SubResource("RectangleShape2D_mxdd4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = SubResource("GradientTexture2D_mxdd4")
 
 [node name="room_label" type="Label" parent="Sprite2D"]

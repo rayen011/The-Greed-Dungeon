@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://belmxp7epic1n"]
+
+[ext_resource type="Script" uid="uid://dhtq80rnyydlg" path="res://scripts/player/item.gd" id="1_5uf52"]
+
+[sub_resource type="Gradient" id="Gradient_5uf52"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.14902, 0.764706, 0.211765, 0.854902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_htaxc"]
+gradient = SubResource("Gradient_5uf52")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_wswgd"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.490196, 0.819608, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5uf52"]
+gradient = SubResource("Gradient_wswgd")
+width = 16
+height = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htaxc"]
+size = Vector2(16, 16)
+
+[node name="Item" type="Area2D"]
+z_index = 10
+collision_layer = 8
+script = ExtResource("1_5uf52")
+sprite_texture = SubResource("GradientTexture2D_htaxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_5uf52")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_htaxc")
